@@ -2,31 +2,28 @@
 
 A class stores extended attributes in one field of SQL database table.
 
-eg:
+Support multiple characterized objects in one table. Assumed environments are ActiveRecord, Sequel, etc.
 
-Product having different attributes, serialize it and save in one TEXT field in a SQL table
+```
+This is only my own use at this moment, No public supports yet.
+```
 
-CREATE TABLE my_table (
- id serial NOT NULL,
- product_id integer UNIQUE,
- product_type integer,
- name character varying(100),
- size character varying(100),
- attributes TEXT,
- primary key (id)
-);
+```ruby
+plate = MaterialPlate.new(10001)
+pipe = MaterialPipe.new(10002)
+plate.width = 1000.0
+# plate.length = 500 # => error
+pipe.length = 1200.0
 
-- product_id, product_type, product_name, and more attributes
-- product_id, object_type, name, power train, max_speed, length, passengers, engine_capacity
-- 10001, :Car, 'Tesra X', 'EV', 250, 5000, 5, nil
-- 10002, :Car, 'Toyota P', 'HV' 170, 4700' 5, 1000
-- ===
-- product_id, object_type, name, type, length, price
-- 10003, :Boat, 'Yamaha A', 'Presure', 10, 100000
-- ===
-- product_id, object_type, name, type, height, passengers
-- 10004, :Rocket, 'Space X', 25, 5
+material_database = [ plate, pipe ]
+material_database.each do |material|
+  puts "#{material.id}: #{material.class}: #{material.size}"
+end
+```
+
 ## Installation
+
+Public Gem is not ready yet.
 
 Add this line to your application's Gemfile:
 
